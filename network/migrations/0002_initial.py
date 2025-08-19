@@ -10,24 +10,39 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('network', '0001_initial'),
+        ("network", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='networknode',
-            name='employees',
-            field=models.ManyToManyField(related_name='network_nodes', to=settings.AUTH_USER_MODEL, verbose_name='Сотрудники'),
+            model_name="networknode",
+            name="employees",
+            field=models.ManyToManyField(
+                related_name="network_nodes", to=settings.AUTH_USER_MODEL, verbose_name="Сотрудники"
+            ),
         ),
         migrations.AddField(
-            model_name='networknode',
-            name='supplier',
-            field=models.ForeignKey(blank=True, help_text='Единственный поставщик данного звена', null=True, on_delete=django.db.models.deletion.PROTECT, related_name='clients', to='network.networknode', verbose_name='Поставщик'),
+            model_name="networknode",
+            name="supplier",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="Единственный поставщик данного звена",
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="clients",
+                to="network.networknode",
+                verbose_name="Поставщик",
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='network.networknode', verbose_name='Владелец'),
+            model_name="product",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="products",
+                to="network.networknode",
+                verbose_name="Владелец",
+            ),
         ),
     ]

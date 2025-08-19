@@ -38,11 +38,7 @@ class NetworkNode(models.Model):
         help_text="Единственный поставщик данного звена",
     )
 
-    employees = models.ManyToManyField(
-        User,
-        related_name='network_nodes',
-        verbose_name='Сотрудники'
-    )
+    employees = models.ManyToManyField(User, related_name="network_nodes", verbose_name="Сотрудники")
 
     # Финансы
     debt = models.DecimalField(
@@ -80,9 +76,7 @@ class NetworkNode(models.Model):
             node = self.supplier
             while node is not None:
                 if node.pk == self.pk:
-                    raise ValidationError(
-                        {"supplier": "Цикл в цепочке поставщиков запрещён."}
-                    )
+                    raise ValidationError({"supplier": "Цикл в цепочке поставщиков запрещён."})
                 node = node.supplier
 
         depth = 0
@@ -90,9 +84,7 @@ class NetworkNode(models.Model):
         while node is not None:
             depth += 1
             if depth > 2:
-                raise ValidationError(
-                    {"supplier": "Глубина иерархии не может превышать 3 уровня (0..2)."}
-                )
+                raise ValidationError({"supplier": "Глубина иерархии не может превышать 3 уровня (0..2)."})
             node = node.supplier
 
     def save(self, *args, **kwargs):
@@ -104,6 +96,7 @@ class Product(models.Model):
     """
     Продукт принадлежит конкретному узлу сети.
     """
+
     owner = models.ForeignKey(
         NetworkNode,
         verbose_name="Владелец",

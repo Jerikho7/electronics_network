@@ -11,16 +11,16 @@ class NetworkNodeAdmin(admin.ModelAdmin):
     get_level.short_description = "Уровень"
 
     list_display = (
-        'name',
-        'supplier',
-        'get_level',
-        'country',
-        'city',
+        "name",
+        "supplier",
+        "get_level",
+        "country",
+        "city",
     )
-    list_filter = ('city', 'country')
-    search_fields = ('name', 'city', 'country')
+    list_filter = ("city", "country")
+    search_fields = ("name", "city", "country")
 
-    @admin.action(description='Очистить задолженность')
+    @admin.action(description="Очистить задолженность")
     def clear_debt(self, request, queryset):
         queryset.update(debt=0.00)
 

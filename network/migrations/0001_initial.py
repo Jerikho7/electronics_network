@@ -8,41 +8,56 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='NetworkNode',
+            name="NetworkNode",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, validators=[django.core.validators.MinLengthValidator(2)], verbose_name='Название')),
-                ('email', models.EmailField(max_length=254, verbose_name='Email')),
-                ('country', models.CharField(max_length=100, verbose_name='Страна')),
-                ('city', models.CharField(max_length=100, verbose_name='Город')),
-                ('street', models.CharField(max_length=120, verbose_name='Улица')),
-                ('house_number', models.CharField(max_length=30, verbose_name='Номер дома')),
-                ('debt', models.DecimalField(decimal_places=2, default=0, max_digits=12, validators=[django.core.validators.MinValueValidator(0)], verbose_name='Задолженность перед поставщиком')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Создано')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=255,
+                        validators=[django.core.validators.MinLengthValidator(2)],
+                        verbose_name="Название",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254, verbose_name="Email")),
+                ("country", models.CharField(max_length=100, verbose_name="Страна")),
+                ("city", models.CharField(max_length=100, verbose_name="Город")),
+                ("street", models.CharField(max_length=120, verbose_name="Улица")),
+                ("house_number", models.CharField(max_length=30, verbose_name="Номер дома")),
+                (
+                    "debt",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0,
+                        max_digits=12,
+                        validators=[django.core.validators.MinValueValidator(0)],
+                        verbose_name="Задолженность перед поставщиком",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Создано")),
             ],
             options={
-                'verbose_name': 'Элемент сети',
-                'verbose_name_plural': 'Элементы сети',
-                'ordering': ('country', 'city', 'name'),
+                "verbose_name": "Элемент сети",
+                "verbose_name_plural": "Элементы сети",
+                "ordering": ("country", "city", "name"),
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, verbose_name='Название')),
-                ('model', models.CharField(max_length=120, verbose_name='Модель')),
-                ('release_date', models.DateField(verbose_name='Дата выхода на рынок')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=255, verbose_name="Название")),
+                ("model", models.CharField(max_length=120, verbose_name="Модель")),
+                ("release_date", models.DateField(verbose_name="Дата выхода на рынок")),
             ],
             options={
-                'verbose_name': 'Продукт',
-                'verbose_name_plural': 'Продукты',
-                'ordering': ('-release_date', 'title'),
+                "verbose_name": "Продукт",
+                "verbose_name_plural": "Продукты",
+                "ordering": ("-release_date", "title"),
             },
         ),
     ]

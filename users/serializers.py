@@ -14,7 +14,7 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "email", "first_name", "last_name", "avatar", "is_active")
+        fields = ("id", "email", "first_name", "last_name", "is_active")
 
 
 class RegisterSerializer(ModelSerializer):
@@ -37,7 +37,7 @@ class RegisterSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "email", "password", "password2", "first_name", "last_name", "avatar")
+        fields = ("id", "email", "password", "password2", "first_name", "last_name")
 
     def validate(self, data):
         """Проверяет, что пароли совпадают.

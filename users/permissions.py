@@ -1,5 +1,6 @@
 from rest_framework.permissions import BasePermission
 
+
 class IsModerator(BasePermission):
     """Права доступа только для модератора."""
 
