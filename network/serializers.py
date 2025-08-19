@@ -43,25 +43,17 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
     """
 
     level = serializers.IntegerField(read_only=True)
+    level_name = serializers.CharField(read_only=True)
     products = ProductSerializer(many=True, read_only=True)
 
     class Meta:
         model = NetworkNode
         fields = [
-            "id",
-            "name",
-            "email",
-            "country",
-            "city",
-            "street",
-            "house_number",
-            "supplier",
-            "debt",
-            "created_at",
-            "level",
-            "products",
+            "id", "name", "email", "country", "city", "street", "house_number",
+            "supplier", "created_at", "debt", "level", "level_name", "products"
         ]
-        read_only_fields = ("created_at",)
+
+    read_only_fields = ("created_at",)
 
     def update(self, instance, validated_data):
         """

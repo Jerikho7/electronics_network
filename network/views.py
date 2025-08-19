@@ -1,9 +1,9 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import NetworkNode, Product
+from .permissions import IsActiveStaff
 from .serializers import NetworkNodeSerializer, ProductSerializer
 from .filters import NetworkNodeFilter
 
@@ -28,7 +28,7 @@ class NetworkNodeViewSet(viewsets.ModelViewSet):
 
     queryset = NetworkNode.objects.select_related("supplier").prefetch_related("products")
     serializer_class = NetworkNodeSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsActiveStaff]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = NetworkNodeFilter
     search_fields = ["name", "city", "country", "email"]
@@ -54,7 +54,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     queryset = Product.objects.select_related("owner")
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsActiveStaff]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ["title", "model", "owner__name", "owner__city"]
     ordering_fields = ["release_date", "title"]

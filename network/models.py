@@ -15,6 +15,11 @@ class NetworkNode(models.Model):
       1 — supplier уровня 0,
       2 — supplier уровня 1.
     """
+    LEVEL_NAMES = {
+        0: "Завод",
+        1: "Розничная сеть",
+        2: "Индивидуальный предприниматель",
+    }
 
     name = models.CharField(
         "Название",
@@ -40,7 +45,6 @@ class NetworkNode(models.Model):
 
     employees = models.ManyToManyField(User, related_name="network_nodes", verbose_name="Сотрудники")
 
-    # Финансы
     debt = models.DecimalField(
         "Задолженность перед поставщиком",
         max_digits=12,
@@ -58,6 +62,11 @@ class NetworkNode(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.city})"
+
+    @property
+    def level_name(self) -> str:
+        """Читаемое название уровня (завод, розница, ИП)."""
+        return self.LEVEL_NAMES.get(self.level, f"Уровень {self.level}")
 
     @property
     def level(self) -> int:
