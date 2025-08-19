@@ -46,7 +46,7 @@ python run python manage.py migrate
 ```
 ### 6. Создание суперпользователя
 ```bash
-python run python manage.py createsuperuser
+python run python manage.py createuser
 ```
 ### 7. Запуск сервера
 ```bash
